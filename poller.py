@@ -2,10 +2,19 @@
 import urllib2
 import ssl
 
+# Define the sites we want to poll and the timeout.
+SITES = (
+    'https://redmine.codegrove.org',
+    'http://koodilehto.fi',
+    'http://vakiopaine.net',
+)
+TIMEOUT = 5
+
 
 def poll(sites, timeout):
+    """Checks if the given URLs are online."""
     for site in sites:
-        print 'polling ' + site
+        print 'Polling ' + site
 
         try:
             response = urllib2.urlopen(site, timeout=timeout)
@@ -15,11 +24,8 @@ def poll(sites, timeout):
         except ssl.SSLError as e:
             print e.message
         else:
-            print 'ok'
+            print 'OK'
 
 if __name__ == '__main__':
-    poll(sites=(
-        'https://redmine.codegrove.org',
-        'http://koodilehto.fi',
-        'http://vakiopaine.net',
-        ), timeout=5)
+    poll(SITES, timeout=TIMEOUT)
+
