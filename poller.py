@@ -13,10 +13,12 @@ TIMEOUT = 5
 
 
 try:
+    """For Mac OSX use Growl notifier."""
     import gntp.notifier
 
     notification = gntp.notifier.mini
 except ImportError:
+    """For Linux try using Pynotigy."""
     try:
         import pygtk
         pygtk.require('2.0')
@@ -27,6 +29,7 @@ except ImportError:
             'Koodilehto Service Error'
         )
     except ImportError:
+        """All other systems get a printed line."""
         def out(data):
             print data
 
@@ -34,7 +37,12 @@ except ImportError:
 
 
 def poll(sites, timeout, ok, error):
-    """Checks if the given URLs are online."""
+    """Checks if the given URLs are online.
+    sites - List of URLs to check.
+    timeout - Timeout in seconds.
+    ok - Which site we are checking.
+    error - Error reporting function.
+    """
     for site in sites:
         ok('Polling ' + site)
 
@@ -50,6 +58,7 @@ def poll(sites, timeout, ok, error):
 
 
 def empty(data):
+    """Placeholder for now."""
     pass
 
 
