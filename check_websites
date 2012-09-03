@@ -3,6 +3,7 @@ import urllib2
 import ssl
 
 # Define the sites we want to poll and the timeout.
+APP_NAME = 'Koodilehto Website Poller'
 SITES = (
     'https://redmine.codegrove.org',
     'http://koodilehto.fi',
@@ -20,6 +21,8 @@ except ImportError:
         import pygtk
         pygtk.require('2.0')
         import pynotify
+
+        pynotify.init(APP_NAME)
 
         def gtk_out(data):
             n = pynotify.Notification(
