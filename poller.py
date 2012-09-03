@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import urllib2
 import ssl
+import functools
 
 # Define the sites we want to poll and the timeout.
 SITES = (
@@ -12,9 +13,25 @@ TIMEOUT = 5
 
 
 try:
-    import gntp.notifier as notify
+    import gntp.notifier
+
+    notification = gntp.notifier.mini
 except ImportError:
-    notify = None
+    try:
+        import pygtk
+        pygtk.require('2.0')
+        import pynotify
+
+        notification = functools.partial(
+            pynotify.Notification,
+            'Koodilehto Service Error'
+        )
+    except ImportError:
+        def out(data):
+            print data
+
+        notification = out
+
 
 def poll(sites, timeout, ok, error):
     """Checks if the given URLs are online."""
@@ -31,15 +48,10 @@ def poll(sites, timeout, ok, error):
         else:
             print 'OK'
 
+
 def empty(data):
     pass
 
-def output(data):
-    if notify:
-        notify.mini(data)
-    else:
-        print data
 
 if __name__ == '__main__':
-    poll(SITES, timeout=TIMEOUT, ok=empty, error=output)
-
+    poll(SITES, timeout=TIMEOUT, ok=empty, error=notification)
