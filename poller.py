@@ -26,7 +26,7 @@ except ImportError:
 
         notification = functools.partial(
             pynotify.Notification,
-            'Koodilehto Service Error'
+            'Koodilehto Service Error','test'
         )
     except ImportError:
         """All other systems get a printed line."""
@@ -40,7 +40,7 @@ def poll(sites, timeout, ok, error):
     """Checks if the given URLs are online.
     sites - List of URLs to check.
     timeout - Timeout in seconds.
-    ok - Which site we are checking.
+    ok - Function for printing information.
     error - Error reporting function.
     """
     for site in sites:
