@@ -26,7 +26,7 @@ except ImportError:
 
         notification = functools.partial(
             pynotify.Notification,
-            'Koodilehto Service Error','test'
+            'Koodilehto Service Error'
         )
     except ImportError:
         """All other systems get a printed line."""
