@@ -11,16 +11,13 @@ SITES = (
 TIMEOUT = 5
 
 
-def poll(sites, timeout):
-    """Checks if the given URLs are online."""
-    for site in sites:
-        print 'Polling ' + site
 try:
     import gntp.notifier as notify
 except ImportError:
     notify = None
 
 def poll(sites, timeout, ok, error):
+    """Checks if the given URLs are online."""
     for site in sites:
         ok('Polling ' + site)
 
