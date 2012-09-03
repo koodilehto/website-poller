@@ -8,7 +8,6 @@ SITES = (
     'https://redmine.codegrove.org',
     'http://koodilehto.fi',
     'http://vakiopaine.net',
-    'http://thisshouldtimeout.net',
 )
 TIMEOUT = 5
 
@@ -43,7 +42,8 @@ def poll(sites, timeout, ok, error):
             response = urllib2.urlopen(site, timeout=timeout)
             response.read()
         except urllib2.URLError as e:
-            error(site + ' ' + str(e.code))
+            code = str(e.code) if hasattr(e, 'code') else ''
+            error(site + ' ' + code)
         except ssl.SSLError as e:
             error(site + ' ' + e.message)
         except Exception as e:
