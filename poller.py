@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import urllib2
 import ssl
-import functools
 
 # Define the sites we want to poll and the timeout.
 SITES = (
@@ -22,10 +21,13 @@ except ImportError:
         pygtk.require('2.0')
         import pynotify
 
-        notification = functools.partial(
-            pynotify.Notification,
-            'Koodilehto Service Error'
-        )
+        def gtk_out(data):
+            pynotify.Notification(
+                'Koodilehto Service Error',
+                data
+            )
+
+        notification = gtk_out
     except ImportError:
         def out(data):
             print data
