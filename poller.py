@@ -22,10 +22,12 @@ except ImportError:
         import pynotify
 
         def gtk_out(data):
-            pynotify.Notification(
+            n = pynotify.Notification(
                 'Koodilehto Service Error',
                 data
             )
+
+            n.show()
 
         notification = gtk_out
     except ImportError:
