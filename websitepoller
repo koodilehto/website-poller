@@ -1,17 +1,15 @@
 #!/usr/bin/env python
 import urllib2
 import ssl
+import os
+import json
 
 
 APP_NAME = 'Koodilehto Website Poller'
 INTERNET_TEST = 'http://www.google.com'
 
-# Define the sites we want to poll and the timeout.
-SITES = (
-    'https://redmine.codegrove.org',
-    'http://koodilehto.fi',
-    'http://vakiopaine.net',
-)
+SITEFILE = '.websitepollerrc'
+SITEFILEPATH = os.getenv('HOME') + os.sep + SITEFILE
 TIMEOUT = 5
 
 
@@ -84,6 +82,19 @@ def has_internet():
     return False
 
 
+def read_sites(filename):
+    """"""
+    try:
+        json_data = open(filename, "r")
+        data = json.load(json_data)
+        json_data.close()
+        return data
+    except IOError:
+        notification('Please create file ' + SITEFILEPATH + ' containing the site list in JSON format.')
+        return []
+
+
 if __name__ == '__main__':
     if has_internet():
-        poll(SITES, timeout=TIMEOUT, ok=empty, error=notification)
+        sites = read_sites(SITEFILEPATH)
+        poll(sites, timeout=TIMEOUT, ok=empty, error=notification)

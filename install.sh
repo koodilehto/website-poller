@@ -4,7 +4,7 @@
 
 CRON_TIME="@hourly DISPLAY=:0.0"
 BIN_DIR="/usr/local/bin/"
-PROGRAM="check_websites"
+PROGRAM="websitepoller"
 PARAMS=" > /dev/null"
 
 # Copy the program.
