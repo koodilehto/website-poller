@@ -3,8 +3,10 @@ import urllib2
 import ssl
 
 
-# Define the sites we want to poll and the timeout.
 APP_NAME = 'Koodilehto Website Poller'
+INTERNET_TEST = 'http://www.google.com'
+
+# Define the sites we want to poll and the timeout.
 SITES = (
     'https://redmine.codegrove.org',
     'http://koodilehto.fi',
@@ -73,5 +75,15 @@ def empty(data):
     pass
 
 
+def has_internet():
+    """Test if we can connect to the Internet."""
+    try:
+        response=urllib2.urlopen(INTERNET_TEST, timeout=TIMEOUT)
+        return True
+    except urllib2.URLError as err: pass
+    return False
+
+
 if __name__ == '__main__':
-    poll(SITES, timeout=TIMEOUT, ok=empty, error=notification)
+    if has_internet():
+        poll(SITES, timeout=TIMEOUT, ok=empty, error=notification)
