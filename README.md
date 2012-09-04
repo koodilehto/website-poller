@@ -5,7 +5,7 @@ Polls specified websites and alerts the administration if needed.
 ## Installation
 
 On a Linux machine run ./install.sh or add the crontab entry yourself:
-@hourly /path/to/website\_checker > /dev/null
+@hourly DISPLAY=:0.0 /path/to/website\_checker > /dev/null
 
 ## Growl
 
