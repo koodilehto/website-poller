@@ -2,6 +2,7 @@
 import urllib2
 import ssl
 
+
 # Define the sites we want to poll and the timeout.
 APP_NAME = 'Koodilehto Website Poller'
 SITES = (
