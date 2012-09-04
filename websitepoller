@@ -83,7 +83,7 @@ def has_internet():
 
 
 def read_sites(filename):
-    """"""
+    """Read the site URLs from the config file."""
     try:
         json_data = open(filename, "r")
         data = json.load(json_data)
