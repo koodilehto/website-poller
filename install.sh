@@ -3,7 +3,7 @@
 # Adds the program to user's cronjobs.
 
 CRON_TIME="@hourly DISPLAY=:0.0"
-BIN_DIR="/usr/bin/"
+BIN_DIR="/usr/local/bin/"
 PROGRAM="check_websites"
 PARAMS=" > /dev/null"
 
