@@ -18,8 +18,9 @@ On a Linux system you need python-notify.
 
 You should have a .websitepollerrc file in the user's home directory. Contents are in JSON format, for example: 
 
+```json
 [
 "http://www.github.org",
 "http://www.google.com"
 ]
-
+```
