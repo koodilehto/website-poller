@@ -20,7 +20,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE."""
 
 import urllib2
-import notify2
 import ssl
 import os
 import json
@@ -42,10 +41,7 @@ try:
 except ImportError:
     """For Linux try using Pynotigy."""
     try:
-        import pygtk
-        pygtk.require('2.0')
-        import pynotify
-
+        import notify2
         notify2.init(APP_NAME)
 
         def dbus_out(data):
