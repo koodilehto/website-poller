@@ -1,22 +1,9 @@
 # website-poller
 
-Polls specified websites and alerts the administration if needed.
+website-poller polls websites specified at ~/.websitepollerrc (JSON) and alerts
+using system notifications should some website fail to respond properly.
 
-## Installation
-
-On a Linux machine change the paths in ./install.sh run it or add the crontab entry yourself: @hourly DISPLAY=:0.0 /path/to/websitepoller.py > /dev/null
-
-## Growl
-
-Note that you need to install [GNTP](https://github.com/kfdm/gntp/) in your system if you want to use Growl (OS X).
-
-## Python-Notify
-
-On a Linux system you need python-notify.
-
-## .websitepollerrc
-
-You should have a .websitepollerrc file in the user's home directory. Contents are in JSON format, for example: 
+Define your ~/.websitepollerrc like this:
 
 ```json
 [
@@ -24,3 +11,23 @@ You should have a .websitepollerrc file in the user's home directory. Contents a
 "http://www.google.com"
 ]
 ```
+
+## Installation
+
+### Linux
+
+Change the paths at ./install.sh run it or add the crontab entry yourself: @hourly DISPLAY=:0.0 /path/to/websitepoller.py > /dev/null
+
+Make sure you have `python-notify`.
+
+### OS X
+
+Make sure you have [GNTP](https://github.com/kfdm/gntp/) installed. Otherwise Linux instructions apply.
+
+### Windows
+
+No official support at the moment.
+
+## License
+
+MIT. See LICENSE for more information.
