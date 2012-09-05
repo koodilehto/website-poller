@@ -6,10 +6,14 @@ using system notifications should some website fail to respond properly.
 Define your `~/.websitepollerrc` like this:
 
 ```json
+{
+"user-agent":"Koodilehto Website Poller",
+"websites":
 [
 "http://www.github.com",
 "http://www.google.com"
 ]
+}
 ```
 
 ## Installation

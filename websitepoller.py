@@ -28,8 +28,8 @@ import json
 APP_NAME = 'Koodilehto Website Poller'
 INTERNET_TEST = 'http://www.google.com'
 
-SITEFILE = '.websitepollerrc'
-SITEFILEPATH = os.getenv('HOME') + os.sep + SITEFILE
+CONFIGFILE = '.websitepollerrc'
+CONFIGFILEPATH = os.getenv('HOME') + os.sep + CONFIGFILE
 TIMEOUT = 5
 
 
@@ -61,9 +61,10 @@ except ImportError:
         notification = out
 
 
-def poll(sites, timeout, ok, error):
+def poll(sites, useragent, timeout, ok, error):
     """Checks if the given URLs are online. sites - List of URLs to check.
-
+    sites - Website URLs that will be tried.
+    useragent - User agent info for the request.
     timeout - Timeout in seconds.
     ok - Function for printing information.
     error - Error reporting function.
@@ -72,7 +73,7 @@ def poll(sites, timeout, ok, error):
         ok('Polling ' + site)
 
         try:
-            headers = { 'User-Agent:' : APP_NAME }
+            headers = { 'User-Agent:' : useragent }
             request = urllib2.Request(site, None, headers)
             response = urllib2.urlopen(request, timeout=timeout)
             response.read()
@@ -97,15 +98,25 @@ def has_internet():
     return False
 
 
-def read_sites(filename):
-    """Read the site URLs from the config file."""
+def parse_config(filename):
+    """Parse the configuration file."""
     try:
         json_data = open(filename, "r")
         data = json.load(json_data)
         json_data.close()
-        return data
+	# Read user agent info.
+        try:
+            useragent = data['user-agent']
+        except KeyError:
+            useragent = ""
+	# Read website URLs.
+        try:
+            sites = data['websites']
+        except KeyError:
+            sites = []
+        return (sites, useragent)
     except IOError:
-        notification('Please create file ' + SITEFILEPATH +
+        notification('Please create file ' + filename +
             ' containing the site list in JSON format.')
     except ValueError:
         notification('Please check the contents of your JSON file.')
@@ -115,5 +126,5 @@ def read_sites(filename):
 
 if __name__ == '__main__':
     if has_internet():
-        sites = read_sites(SITEFILEPATH)
-        poll(sites, timeout=TIMEOUT, ok=lambda a: a, error=notification)
+        (sites, useragent) = parse_config(CONFIGFILEPATH)
+        poll(sites, useragent, timeout=TIMEOUT, ok=lambda a: a, error=notification)
