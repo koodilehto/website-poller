@@ -38,19 +38,24 @@ using system notifications should some website fail to respond properly.</p>
 
 <p>Define your <code>~/.websitepollerrc</code> like this:</p>
 
-<div class="highlight"><pre><span class="p">[</span>
+<div class="highlight"><pre>
+<span class="p">{</span>
+<span class="s2">"user-agent":"Koodilehto Website Poller"</span><span class="p">,</span>
+<span class="s2">"websites":</span>
+<span class="p">[</span>
 <span class="s2">"http://www.github.com"</span><span class="p">,</span>
 <span class="s2">"http://www.google.com"</span>
 <span class="p">]</span>
+<span class="p">}</span>
 </pre></div>
 
 <h2>Installation</h2>
 
 <h3>Linux</h3>
 
-<p>Change the paths at ./install.sh and run it or add the crontab entry yourself: <code>@hourly DISPLAY=:0.0 /path/to/websitepoller.py &gt; /dev/null</code></p>
+<p>Change the paths at ./install.sh and run it, or add the crontab entry yourself: <code>@hourly DISPLAY=:0.0 /path/to/websitepoller.py &gt; /dev/null</code></p>
 
-<p>Make sure you have <code>python-notify</code> installed in order for the notications to work.</p>
+<p>Make sure you have <code>python-notify2</code> installed in order for the notications to work.</p>
 
 <h3>OS X</h3>
 
