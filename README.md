@@ -16,9 +16,9 @@ Define your `~/.websitepollerrc` like this:
 
 ### Linux
 
-Change the paths at ./install.sh and run it or add the crontab entry yourself: `@hourly DISPLAY=:0.0 /path/to/websitepoller.py > /dev/null`
+Change the paths at ./install.sh and run it, or add the crontab entry yourself: `@hourly DISPLAY=:0.0 /path/to/websitepoller.py > /dev/null`
 
-Make sure you have `python-notify` installed in order for the notications to work.
+Make sure you have `python-notify2` installed in order for the notications to work.
 
 ### OS X
 

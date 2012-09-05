@@ -20,6 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE."""
 
 import urllib2
+import notify2
 import ssl
 import os
 import json
@@ -45,17 +46,17 @@ except ImportError:
         pygtk.require('2.0')
         import pynotify
 
-        pynotify.init(APP_NAME)
+        notify2.init(APP_NAME)
 
-        def gtk_out(data):
-            n = pynotify.Notification(
+        def dbus_out(data):
+            n = notify2.Notification(
                 'Koodilehto Service Error',
                 data
             )
 
             n.show()
 
-        notification = gtk_out
+        notification = dbus_out
     except ImportError:
         """All other systems get a printed line."""
         def out(data):
