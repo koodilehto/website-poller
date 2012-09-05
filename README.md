@@ -1,9 +1,9 @@
 # website-poller
 
-website-poller polls websites specified at ~/.websitepollerrc (JSON) and alerts
+website-poller polls websites specified at `~/.websitepollerrc` (JSON) and alerts
 using system notifications should some website fail to respond properly.
 
-Define your ~/.websitepollerrc like this:
+Define your `~/.websitepollerrc` like this:
 
 ```json
 [
