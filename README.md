@@ -4,7 +4,7 @@ Polls specified websites and alerts the administration if needed.
 
 ## Installation
 
-On a Linux machine change the paths in ./install.sh run it or add the crontab entry yourself: @hourly DISPLAY=:0.0 /path/to/websitepoller > /dev/null
+On a Linux machine change the paths in ./install.sh run it or add the crontab entry yourself: @hourly DISPLAY=:0.0 /path/to/websitepoller.py > /dev/null
 
 ## Growl
 
@@ -20,7 +20,7 @@ You should have a .websitepollerrc file in the user's home directory. Contents a
 
 ```json
 [
-"http://www.github.org",
+"http://www.github.com",
 "http://www.google.com"
 ]
 ```

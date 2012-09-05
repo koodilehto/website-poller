@@ -4,7 +4,7 @@
 
 CRON_TIME="@hourly DISPLAY=:0.0"
 BIN_DIR="/usr/local/bin/"
-PROGRAM="websitepoller"
+PROGRAM="websitepoller.py"
 PARAMS=" > /dev/null"
 
 # Copy the program.

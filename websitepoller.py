@@ -1,11 +1,23 @@
 #!/usr/bin/env python
-'''Copyright (C) 2012 Koodilehto osk.
+"""Copyright (C) 2012 Koodilehto osk.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.'''
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE."""
 
 import urllib2
 import ssl
@@ -53,8 +65,8 @@ except ImportError:
 
 
 def poll(sites, timeout, ok, error):
-    """Checks if the given URLs are online.
-    sites - List of URLs to check.
+    """Checks if the given URLs are online. sites - List of URLs to check.
+
     timeout - Timeout in seconds.
     ok - Function for printing information.
     error - Error reporting function.
@@ -76,18 +88,14 @@ def poll(sites, timeout, ok, error):
             ok('OK')
 
 
-def empty(data):
-    """Placeholder for now."""
-    pass
-
-
 def has_internet():
     """Test if we can connect to the Internet."""
     try:
-        response=urllib2.urlopen(INTERNET_TEST, timeout=TIMEOUT)
+        urllib2.urlopen(INTERNET_TEST, timeout=TIMEOUT)
+
         return True
-    except urllib2.URLError as err: pass
-    return False
+    except urllib2.URLError:
+        pass
 
 
 def read_sites(filename):
@@ -98,11 +106,15 @@ def read_sites(filename):
         json_data.close()
         return data
     except IOError:
-        notification('Please create file ' + SITEFILEPATH + ' containing the site list in JSON format.')
-        return []
+        notification('Please create file ' + SITEFILEPATH +
+            ' containing the site list in JSON format.')
+    except ValueError:
+        notification('Please check the contents of your JSON file.')
+
+    return []
 
 
 if __name__ == '__main__':
     if has_internet():
         sites = read_sites(SITEFILEPATH)
-        poll(sites, timeout=TIMEOUT, ok=empty, error=notification)
+        poll(sites, timeout=TIMEOUT, ok=lambda a: a, error=notification)
