@@ -16,13 +16,13 @@ Define your ~/.websitepollerrc like this:
 
 ### Linux
 
-Change the paths at ./install.sh run it or add the crontab entry yourself: `@hourly DISPLAY=:0.0 /path/to/websitepoller.py > /dev/null`
+Change the paths at ./install.sh and run it or add the crontab entry yourself: `@hourly DISPLAY=:0.0 /path/to/websitepoller.py > /dev/null`
 
 Make sure you have `python-notify` installed in order for the notications to work.
 
 ### OS X
 
-Make sure you have [GNTP](https://github.com/kfdm/gntp/) installed. Otherwise Linux instructions apply.
+Make sure you have [GNTP](https://github.com/kfdm/gntp/) installed. Note that this depends on [Growl](http://growl.info/). Otherwise Linux instructions apply.
 
 ### Windows
 
