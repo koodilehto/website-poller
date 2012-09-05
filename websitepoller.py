@@ -75,7 +75,9 @@ def poll(sites, timeout, ok, error):
         ok('Polling ' + site)
 
         try:
-            response = urllib2.urlopen(site, timeout=timeout)
+            headers = { 'User-Agent:' : APP_NAME }
+            request = urllib2.Request(site, None, headers)
+            response = urllib2.urlopen(request, timeout=timeout)
             response.read()
         except urllib2.URLError as e:
             code = str(e.code) if hasattr(e, 'code') else ''
