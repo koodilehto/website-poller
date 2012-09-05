@@ -92,10 +92,10 @@ def has_internet():
     """Test if we can connect to the Internet."""
     try:
         urllib2.urlopen(INTERNET_TEST, timeout=TIMEOUT)
-
         return True
     except urllib2.URLError:
         pass
+    return False
 
 
 def read_sites(filename):
