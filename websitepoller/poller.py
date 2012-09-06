@@ -37,7 +37,23 @@ try:
     """For Mac OSX use Growl notifier."""
     import gntp.notifier
 
-    notification = gntp.notifier.mini
+    growl = gntp.notifier.GrowlNotifier(
+        applicationName="Website-poller",
+        notifications=["Errors"],
+        defaultNotifications=["Errors"],
+    )
+    growl.register()
+
+    def notify(data):
+        growl.notify(
+            noteType="Errors",
+            title="Service Error",
+            description=data,
+            sticky=True,
+            priority=1,
+        )
+
+    notification = notify
 except ImportError:
     """For Linux try using Pynotigy."""
     try:
