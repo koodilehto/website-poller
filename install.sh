@@ -6,7 +6,7 @@ CRON_TIME="@hourly DISPLAY=:0.0"
 PROGRAM="websitepoller"
 PARAMS=" > /dev/null"
 
-./setup.py install
+sudo ./setup.py install
 
 TO_CRON="$CRON_TIME $PROGRAM $PARAMS"
 
