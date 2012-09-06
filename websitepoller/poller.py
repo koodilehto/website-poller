@@ -46,7 +46,7 @@ except ImportError:
 
         def dbus_out(data):
             n = notify2.Notification(
-                'Koodilehto Service Error',
+                'Service Error',
                 data
             )
 
@@ -73,7 +73,7 @@ def poll(sites, useragent, timeout, ok, error):
         ok('Polling ' + site)
 
         try:
-            headers = { 'User-Agent:' : useragent }
+            headers = {'User-Agent:': useragent}
             request = urllib2.Request(site, None, headers)
             response = urllib2.urlopen(request, timeout=timeout)
             response.read()
@@ -92,39 +92,49 @@ def has_internet():
     """Test if we can connect to the Internet."""
     try:
         urllib2.urlopen(INTERNET_TEST, timeout=TIMEOUT)
+
         return True
     except urllib2.URLError:
         pass
-    return False
 
 
-def parse_config(filename):
+def parse_config(filename, error):
     """Parse the configuration file."""
     try:
-        json_data = open(filename, "r")
-        data = json.load(json_data)
-        json_data.close()
-	# Read user agent info.
-        try:
-            useragent = data['user-agent']
-        except KeyError:
-            useragent = ""
-	# Read website URLs.
+        with open(filename, "r") as f:
+            data = json.load(f)
+
+        if not isinstance(data, dict):
+            error('Invalid configuration!')
+
+            return
+
         try:
             sites = data['websites']
         except KeyError:
-            sites = []
-        return (sites, useragent)
+            error('Missing website configuration!')
+
+            return
+
+        return {
+            'sites': sites,
+            'useragent': data.get('user-agent', '')
+        }
     except IOError:
-        notification('Please create file ' + filename +
+        error('Please create file ' + filename +
             ' containing the site list in JSON format.')
     except ValueError:
-        notification('Please check the contents of your JSON file.')
+        error('Please check the contents of your JSON file.')
 
-    return []
 
+def run():
+    if has_internet():
+        conf = parse_config(CONFIGFILEPATH, error=notification)
+
+        if conf:
+            poll(conf["sites"], conf["useragent"], timeout=TIMEOUT,
+                ok=lambda a: a, error=notification
+            )
 
 if __name__ == '__main__':
-    if has_internet():
-        (sites, useragent) = parse_config(CONFIGFILEPATH)
-        poll(sites, useragent, timeout=TIMEOUT, ok=lambda a: a, error=notification)
+    run()

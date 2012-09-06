@@ -7,12 +7,11 @@ Define your `~/.websitepollerrc` like this:
 
 ```json
 {
-"user-agent":"Koodilehto Website Poller",
-"websites":
-[
-"http://www.github.com",
-"http://www.google.com"
-]
+    "user-agent": "Koodilehto Website Poller",
+    "websites": [
+        "http://www.github.com",
+        "http://www.google.com"
+    ]
 }
 ```
 
