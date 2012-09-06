@@ -55,7 +55,7 @@ try:
 
     notification = notify
 except ImportError:
-    """For Linux try using Pynotigy."""
+    """For Linux try using notify2."""
     try:
         import notify2
         notify2.init(APP_NAME)
@@ -105,10 +105,12 @@ def poll(sites, useragent, timeout, ok, error):
 
 
 def has_internet():
-    """Test if we can connect to the Internet."""
+    """Test if we can connect to the Internet.
+    Returns True if can connect to the specified site.
+    Return Nonen if there is no such connection available.
+    """
     try:
         urllib2.urlopen(INTERNET_TEST, timeout=TIMEOUT)
-
         return True
     except urllib2.URLError:
         pass
@@ -121,7 +123,7 @@ def parse_config(filename, error):
             data = json.load(f)
 
         if not isinstance(data, dict):
-            error('Invalid configuration!')
+            error('Invalid configuration format!')
 
             return
 
