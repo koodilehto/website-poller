@@ -16,7 +16,7 @@ except (ImportError, IOError, OSError):
 setup(
     name= "website-poller",
     version = websitepoller.__version__,
-    url = 'https://koodilehto.github.com/website-poller',
+    url = 'http://koodilehto.github.com/website-poller',
     license = 'MIT',
     description = description,
     long_description = long_description,
