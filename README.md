@@ -25,7 +25,7 @@ Make sure you have `python-notify2` installed in order for the notications to wo
 
 ### OS X
 
-Make sure you have [GNTP](https://github.com/kfdm/gntp/) installed. Note that this depends on [Growl](http://growl.info/). Otherwise Linux instructions apply.
+Make sure you have some version of [Growl](http://growl.info/) installed. Otherwise Linux instructions apply.
 
 ### Windows
 

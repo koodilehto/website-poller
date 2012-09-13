@@ -25,6 +25,7 @@ import ssl
 import os
 import json
 import argparse
+import subprocess
 
 
 APP_NAME = 'Koodilehto Website Poller'
@@ -35,28 +36,19 @@ CONFIGFILEPATH = os.getenv('HOME') + os.sep + CONFIGFILE
 TIMEOUT = 5
 
 
-try:
-    """For Mac OSX use Growl notifier."""
-    import gntp.notifier
+def growlnotify_exists():
+    return subprocess.call(['type', 'growlnotify'],
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE) == 0
 
-    growl = gntp.notifier.GrowlNotifier(
-        applicationName="Website-poller",
-        notifications=["Errors"],
-        defaultNotifications=["Errors"],
-    )
-    growl.register()
 
+# use growlnotify command on os x
+if growlnotify_exists():
     def notify(data):
-        growl.notify(
-            noteType="Errors",
-            title="Service Error",
-            description=data,
-            sticky=True,
-            priority=1,
-        )
+        subprocess.call(['growlnotify -t "Service Error" -m "' + data + '"'],
+            shell=True)
 
     notification = notify
-except ImportError:
+else:
     """For Linux try using notify2."""
     try:
         import notify2
