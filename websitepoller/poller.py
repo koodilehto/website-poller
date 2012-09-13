@@ -19,10 +19,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE."""
 
+from __future__ import with_statement
 import urllib2
 import ssl
 import os
 import json
+import argparse
 
 
 APP_NAME = 'Koodilehto Website Poller'
@@ -145,8 +147,20 @@ def parse_config(filename, error):
         error('Please check the contents of your JSON file.')
 
 
+def parse_args():
+    with open('README.md', 'r') as f:
+        description = f.read()
+
+    return argparse.ArgumentParser(
+        description=description,
+        formatter_class=argparse.RawTextHelpFormatter
+    ).parse_args()
+
+
 def run():
-    if has_internet():
+    args = parse_args()
+
+    if 'help' not in args and has_internet():
         conf = parse_config(CONFIGFILEPATH, error=notification)
 
         if conf:
