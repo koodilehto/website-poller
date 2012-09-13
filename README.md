@@ -25,7 +25,7 @@ Make sure you have `python-notify2` installed in order for the notications to wo
 
 ### OS X
 
-Make sure you have some version of [Growl](http://growl.info/) installed. Otherwise Linux instructions apply.
+Make sure you have [Growl](http://growl.info/) and [growlnotify](http://growl.info/extras.php#growlnotify) installed. Otherwise Linux instructions apply.
 
 ### Windows
 
