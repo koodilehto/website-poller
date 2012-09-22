@@ -25,7 +25,7 @@ setup(
     packages=['websitepoller', ],
     package_dir={'websitepoller': 'websitepoller', },
     install_requires=['setuptools', ],
-    data_files=['README.md'],
+    data_files=[('', ['README.md'])],
     entry_points="""
     [console_scripts]
     websitepoller = websitepoller:run
