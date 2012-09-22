@@ -140,10 +140,16 @@ def parse_config(filename, error):
 
 
 def parse_args():
-    readme_path = os.path.join(os.path.split(__file__)[0], '..', 'README.md')
+    # TODO: figure out how to include README at dist properly!!!
+    #readme_path = os.path.join(os.path.split(__file__)[0], '..', 'README.md')
 
-    with open(readme_path, 'r') as f:
-        description = f.read()
+    #with open(readme_path, 'r') as f:
+    #    description = f.read()
+
+    description = 'website-poller uses a system notification to let you\n' + \
+        'know if some site defined at your .websitepollerrc does not\n' + \
+        'respond properly. .websitepollerrc is a json file that contains\n' + \
+        'a dict that may have user-agent string and websites list.\n'
 
     return argparse.ArgumentParser(
         description=description,
