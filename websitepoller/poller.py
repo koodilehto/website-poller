@@ -140,7 +140,9 @@ def parse_config(filename, error):
 
 
 def parse_args():
-    with open('README.md', 'r') as f:
+    readme_path = os.path.join(os.path.split(__file__)[0], '..', 'README.md')
+
+    with open(readme_path, 'r') as f:
         description = f.read()
 
     return argparse.ArgumentParser(

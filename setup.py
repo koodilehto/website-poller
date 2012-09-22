@@ -14,17 +14,18 @@ except (ImportError, IOError, OSError):
     long_description = description
 
 setup(
-    name= "website-poller",
-    version = websitepoller.__version__,
-    url = 'http://koodilehto.github.com/website-poller',
-    license = 'MIT',
-    description = description,
-    long_description = long_description,
-    author = websitepoller.__author__,
-    author_email = 'info@koodilehto.fi',
-    packages = ['websitepoller', ],
-    package_dir = {'websitepoller': 'websitepoller', },
-    install_requires = ['setuptools', ],
+    name="website-poller",
+    version=websitepoller.__version__,
+    url='http://koodilehto.github.com/website-poller',
+    license='MIT',
+    description=description,
+    long_description=long_description,
+    author=websitepoller.__author__,
+    author_email='info@koodilehto.fi',
+    packages=['websitepoller', ],
+    package_dir={'websitepoller': 'websitepoller', },
+    install_requires=['setuptools', ],
+    data_files=['README.md'],
     entry_points="""
     [console_scripts]
     websitepoller = websitepoller:run
