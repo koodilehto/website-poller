@@ -36,13 +36,15 @@ CONFIGFILEPATH = os.getenv('HOME') + os.sep + CONFIGFILE
 TIMEOUT = 5
 
 
+def is_osx():
+    return os.uname()[0] == 'Darwin'
+
 def growlnotify_exists():
     return subprocess.call(['type', 'growlnotify'],
         stdout=subprocess.PIPE, stderr=subprocess.PIPE) == 0
 
-
 # use growlnotify command on os x
-if growlnotify_exists():
+if is_osx() and growlnotify_exists():
     def notify(data):
         subprocess.call(['growlnotify -t "Service Error" -m "' + data + '"'],
             shell=True)
