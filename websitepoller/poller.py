@@ -85,7 +85,7 @@ def poll(sites, useragent, timeout, ok, error):
         ok('Polling ' + site)
 
         try:
-            headers = {'User-Agent:': useragent}
+            headers = {'User-Agent': useragent}
             request = urllib2.Request(site, None, headers)
             response = urllib2.urlopen(request, timeout=timeout)
             response.read()
